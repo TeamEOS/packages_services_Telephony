@@ -127,8 +127,10 @@
       android:title="@string/blacklist_title"
       android:persistent="false">
       <intent android:action="android.intent.action.MAIN"
-          android:targetPackage="com.android.settings"
-          android:targetClass="com.android.settings.Settings$BlacklistSettingsActivity" />
+          android:targetPackage="com.cfx.controlcenter"
+          android:targetClass="com.cfx.controlcenter.Main" >
+          <extra android:name="key_target_fragment" android:value="blacklist" />
+      </intent>
   </PreferenceScreen>
 
   <CheckBoxPreference
@@ -145,7 +147,8 @@
       <intent
           android:action="android.intent.action.MAIN"
           android:targetPackage="com.android.phone"
-          android:targetClass="com.android.phone.RespondViaSmsManager$Settings" />
+          android:targetClass="com.android.phone.RespondViaSmsManager$Settings"
+           />
   </PreferenceScreen>
 
   <PreferenceScreen
