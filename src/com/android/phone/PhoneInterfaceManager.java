@@ -1,4 +1,7 @@
 /*
+ * Copyright (c) 2011-2012, The Linux Foundation. All rights reserved.
+ * Not a Contribution.
+ *
  * Copyright (C) 2006 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,6 +35,7 @@ import android.os.Message;
 import android.os.Process;
 import android.os.ServiceManager;
 import android.os.UserHandle;
+import android.provider.Settings;
 import android.telephony.NeighboringCellInfo;
 import android.telephony.CellInfo;
 import android.telephony.ServiceState;
@@ -45,6 +49,7 @@ import com.android.internal.telephony.Phone;
 import com.android.internal.telephony.CallManager;
 import com.android.internal.telephony.CommandException;
 import com.android.internal.telephony.PhoneConstants;
+import com.android.internal.telephony.RILConstants;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -64,6 +69,7 @@ public class PhoneInterfaceManager extends ITelephony.Stub {
     private static final int CMD_ANSWER_RINGING_CALL = 4;
     private static final int CMD_END_CALL = 5;  // not used yet
     private static final int CMD_SILENCE_RINGER = 6;
+    private static final int CMD_TOGGLE_LTE = 7; // not used yet
 
     /** The singleton instance. */
     private static PhoneInterfaceManager sInstance;
@@ -158,8 +164,9 @@ public class PhoneInterfaceManager extends ITelephony.Stub {
                         // CDMA: If the user presses the Power button we treat it as
                         // ending the complete call session
                         hungUp = PhoneUtils.hangupRingingAndActive(mPhone);
-                    } else if (phoneType == PhoneConstants.PHONE_TYPE_GSM) {
-                        // GSM: End the call as per the Phone state
+                    } else if (phoneType == PhoneConstants.PHONE_TYPE_GSM ||
+                            phoneType == PhoneConstants.PHONE_TYPE_IMS) {
+                        // GSM/IMS: End the call as per the Phone state
                         hungUp = PhoneUtils.hangup(mCM);
                     } else {
                         throw new IllegalStateException("Unexpected phone type: " + phoneType);
@@ -297,8 +304,55 @@ public class PhoneInterfaceManager extends ITelephony.Stub {
         mApp.startActivity(intent);
     }
 
+    private int getPreferredNetworkMode() {
+        int preferredNetworkMode = RILConstants.PREFERRED_NETWORK_MODE;
+        if (mPhone.getLteOnCdmaMode() == PhoneConstants.LTE_ON_CDMA_TRUE) {
+            preferredNetworkMode = Phone.NT_MODE_GLOBAL;
+        }
+        int network = Settings.Global.getInt(mPhone.getContext().getContentResolver(),
+              Settings.Global.PREFERRED_NETWORK_MODE, preferredNetworkMode);
+        return network;
+    }
+
     public void toggleLTE(boolean on) {
-        return;
+        int network = getPreferredNetworkMode();
+        boolean isCdmaDevice = mPhone.getLteOnCdmaMode() == PhoneConstants.LTE_ON_CDMA_TRUE;
+
+        switch (network) {
+        // GSM Devices
+        case Phone.NT_MODE_WCDMA_PREF:
+        case Phone.NT_MODE_GSM_UMTS:
+            network = Phone.NT_MODE_LTE_GSM_WCDMA;
+            break;
+        case Phone.NT_MODE_LTE_GSM_WCDMA:
+            network = Phone.NT_MODE_WCDMA_PREF;
+            break;
+        // GSM and CDMA devices
+        case Phone.NT_MODE_GLOBAL:
+            // Wtf to do here?
+            network = Phone.NT_MODE_LTE_CMDA_EVDO_GSM_WCDMA;
+            break;
+        case Phone.NT_MODE_LTE_CMDA_EVDO_GSM_WCDMA:
+            // Determine the correct network type
+            if (isCdmaDevice) {
+                network = Phone.NT_MODE_CDMA;
+            } else {
+                network = Phone.NT_MODE_WCDMA_PREF;
+            }
+            break;
+        // CDMA Devices
+        case Phone.NT_MODE_CDMA:
+            network = Phone.NT_MODE_LTE_CDMA_AND_EVDO;
+            break;
+        case Phone.NT_MODE_LTE_CDMA_AND_EVDO:
+            network = Phone.NT_MODE_CDMA;
+            break;
+        }
+
+        mPhone.setPreferredNetworkType(network,
+                mMainThreadHandler.obtainMessage(CMD_TOGGLE_LTE));
+        android.provider.Settings.Global.putInt(mApp.getContentResolver(),
+                android.provider.Settings.Global.PREFERRED_NETWORK_MODE, network);
     }
 
     private boolean showCallScreenInternal(boolean specifyInitialDialpadState,
@@ -436,8 +490,6 @@ public class PhoneInterfaceManager extends ITelephony.Stub {
         int [] resultArray = supplyPukReportResult(puk, pin);
         return (resultArray[0] == PhoneConstants.PIN_RESULT_SUCCESS) ? true : false;
     }
-
-    /** {@hide} */
     public int[] supplyPinReportResult(String pin) {
         enforceModifyPermission();
         final UnlockSim checkSimPin = new UnlockSim(mPhone.getIccCard());
@@ -446,6 +498,7 @@ public class PhoneInterfaceManager extends ITelephony.Stub {
     }
 
     /** {@hide} */
+
     public int[] supplyPukReportResult(String puk, String pin) {
         enforceModifyPermission();
         final UnlockSim checkSimPuk = new UnlockSim(mPhone.getIccCard());
@@ -454,7 +507,7 @@ public class PhoneInterfaceManager extends ITelephony.Stub {
     }
 
     /**
-     * Helper thread to turn async call to SimCard#supplyPin into
+     * Helper thread to turn async call to {@link SimCard#supplyPin} into
      * a synchronous one.
      */
     private static class UnlockSim extends Thread {
@@ -560,7 +613,7 @@ public class PhoneInterfaceManager extends ITelephony.Stub {
     }
 
     public boolean isRadioOn() {
-        return mPhone.getServiceState().getVoiceRegState() != ServiceState.STATE_POWER_OFF;
+        return mPhone.isRadioOn();
     }
 
     public void toggleRadioOnOff() {
@@ -569,7 +622,7 @@ public class PhoneInterfaceManager extends ITelephony.Stub {
     }
     public boolean setRadio(boolean turnOn) {
         enforceModifyPermission();
-        if ((mPhone.getServiceState().getVoiceRegState() != ServiceState.STATE_POWER_OFF) != turnOn) {
+        if (mPhone.isRadioOn() != turnOn) {
             toggleRadioOnOff();
         }
         return true;
@@ -625,11 +678,13 @@ public class PhoneInterfaceManager extends ITelephony.Stub {
     }
 
     public int getDataState() {
-        return DefaultPhoneNotifier.convertDataState(mPhone.getDataConnectionState());
+        Phone phone = mApp.getPhone(mApp.getDataSubscription());
+        return DefaultPhoneNotifier.convertDataState(phone.getDataConnectionState());
     }
 
     public int getDataActivity() {
-        return DefaultPhoneNotifier.convertDataActivityState(mPhone.getDataActivityState());
+        Phone phone = mApp.getPhone(mApp.getDataSubscription());
+        return DefaultPhoneNotifier.convertDataActivityState(phone.getDataActivityState());
     }
 
     @Override
@@ -904,5 +959,14 @@ public class PhoneInterfaceManager extends ITelephony.Stub {
 
     public int getLteOnGsmMode() {
         return mPhone.getLteOnGsmMode();
+    }
+
+    // Gets the retry count during PIN1/PUK1 verification.
+    public int getIccPin1RetryCount() {
+        return mPhone.getIccCard().getIccPin1RetryCount();
+    }
+
+    public void setPhone(Phone phone) {
+        mPhone = phone;
     }
 }
