@@ -15,7 +15,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="label_nsdp">SIM откључавање мрежног подскупа PIN</string>
   <string name="label_cdp">SIM корпоративно откључавање PIN-а</string>
   <string name="label_spdp">SIM провајдер сервиса откључавања PIN-а</string>
@@ -89,18 +89,15 @@
   <string name="sub3_summary">Управљање претплатом 3</string>
   <string name="prompt">Благовремено</string>
   <string name="prompt_user">Благовремени корисник</string>
-  <string name="tty_mode_not_allowed_vt_call">TTY Режим промена није дозвољен током VT позива</string>
+  <string name="tty_mode_not_allowed_vt_call">TTY промена режима није дозвољена током VT позива</string>
   <string name="fdn_service_unavailable">FDN услуга није доступна.</string>
   <string name="exportContacts">Извоз контаката на SIM картицу\u2026</string>
   <string name="onscreenSwitchText">Пребаци претплату</string>
-  <string name="xdivert_title">X-скретање</string>
   <string name="xdivert_summary">CFNRc подешавања</string>
   <string name="phone_numbers">Унесите бројеве телефона</string>
   <string name="sub1LineNumber">Sub 1 број:</string>
   <string name="sub2LineNumber">Sub 2 број:</string>
   <string name="proceed">Приступање</string>
-  <string name="xdivert_button">X-скретање</string>
-  <string name="xdivert_setting">X-скретање</string>
   <string name="sum_xdivert_enabled">X-скретање омогућено</string>
   <string name="sum_xdivert_disabled">X-скретање онемогућено</string>
   <string name="xdivert_not_supported">X-скретање није подржано за CDMA</string>
@@ -111,13 +108,6 @@
   <string name="xdivert_active">Активно</string>
   <string name="xdivert_not_active">Није активно</string>
   <string name="xdivert_imsi_not_read">SIM иницијализација у току. Покушајте поново касније.</string>
-  <string name="managed_roaming_title">Уреди роминг</string>
-  <string name="managed_roaming_title_sub1">Уреди роминг (SUB 1)</string>
-  <string name="managed_roaming_title_sub2">Уреди роминг (SUB 2)</string>
-  <string name="managed_roaming_title_sub3">Уреди роминг (SUB 3)</string>
-  <string name="managed_roaming_dialog_content">Мрежа са ограниченим сервисом пронађена. Да ли желите да покренете претрагу мрежа?</string>
-  <string name="managed_roaming_dialog_ok_button">Да</string>
-  <string name="managed_roaming_dialog_cancel_button">Не</string>
   <string name="no_volte">Није могуће направити IMS позиве</string>
   <string name="no_vt_allowed">Да бисте упутили видео позив, искључите TTY режим</string>
   <string name="ims_edit_title">IMS детаљи уговора</string>
@@ -154,15 +144,6 @@
   <string name="exportAllcontatsNoContacts"> Није пронађен ниједан контакт за извоз на SIM </string>
   <string name="cursorError">Неважећи подаци курсора</string>
   <string name="set_subscription">Изаберите претплату</string>
-  <string name="card_01">Картица 1 / SUB 1</string>
-  <string name="card_02">Картица 2 / SUB 2</string>
-  <string name="card_03">Картица 3 / SUB 3 </string>
-  <string name="place_a_call1">Претплата 1</string>
-  <string name="place_a_call2">Претплата 2</string>
-  <string name="place_a_call3">Претплата 3</string>
-  <string name="count_down">Секунде: </string>
-  <string name="call_number">Коме: </string>
-  <string name="cancel_call">Откажи</string>
   <string name="set_subscription_error_atleast_one">Изаберите најмање једну претплату</string>
   <string name="set_uicc_subscription_progress">Подешавање претплате\u2026</string>
   <string name="set_sub_success">Претплата је успешно постављена</string>

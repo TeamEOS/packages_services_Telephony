@@ -15,7 +15,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="label_nsdp">PIN na odomknutie podsiete SIM</string>
   <string name="label_cdp">PIN na odomknutie korporátnej SIM</string>
   <string name="label_spdp">PIN na odomknutie SIM poskytovateľa služieb</string>
@@ -93,14 +93,11 @@
   <string name="fdn_service_unavailable">Služba FDN nie je k dispozícii.</string>
   <string name="exportContacts">Export kontaktov na kartu SIM\u2026</string>
   <string name="onscreenSwitchText">Zmeniť poskytovateľa</string>
-  <string name="xdivert_title">X-Divert</string>
   <string name="xdivert_summary">Nastavenia CFNRc</string>
   <string name="phone_numbers">Zadajte telefónne čísla</string>
   <string name="sub1LineNumber">Číslo 1:</string>
   <string name="sub2LineNumber">Číslo 2:</string>
   <string name="proceed">Pokračovať</string>
-  <string name="xdivert_button">X-Divert</string>
-  <string name="xdivert_setting">X-Divert</string>
   <string name="sum_xdivert_enabled">X-Divert povolený</string>
   <string name="sum_xdivert_disabled">X-Divert zakázaný</string>
   <string name="xdivert_not_supported">X-Divert nie je pre CDMA podporovaný</string>
@@ -111,13 +108,6 @@
   <string name="xdivert_active">Aktívny</string>
   <string name="xdivert_not_active">Neaktívny</string>
   <string name="xdivert_imsi_not_read">Prebieha inicializácia SIM. Prosím, skúste to neskôr.</string>
-  <string name="managed_roaming_title">Riadený roaming</string>
-  <string name="managed_roaming_title_sub1">Riadený roaming (Posk. 1)</string>
-  <string name="managed_roaming_title_sub2">Riadený roaming (Posk. 2)</string>
-  <string name="managed_roaming_title_sub3">Riadený roaming (Posk. 3)</string>
-  <string name="managed_roaming_dialog_content">Našla sa sieť s obmedzenými službami. Chcete spustiť vyhľadávanie siete?</string>
-  <string name="managed_roaming_dialog_ok_button">Áno</string>
-  <string name="managed_roaming_dialog_cancel_button">Nie</string>
   <string name="no_volte">Nie je možné vytvárať hovory IMS</string>
   <string name="no_vt_allowed">Pre vytvorenie videohovoru, vypnite režim TTY</string>
   <string name="ims_edit_title">Podrobnosti účtu IMS</string>
@@ -154,15 +144,6 @@
   <string name="exportAllcontatsNoContacts">Nenašli sa žiadne kontakty pre export na kartu SIM</string>
   <string name="cursorError">Neplatné údaje kurzora</string>
   <string name="set_subscription">Vyberte poskytovateľa</string>
-  <string name="card_01">Karta 1 / Posk. 1</string>
-  <string name="card_02">Karta 2 / Posk. 2</string>
-  <string name="card_03">Karta 3 / Posk. 3</string>
-  <string name="place_a_call1">Poskytovateľ 1</string>
-  <string name="place_a_call2">Poskytovateľ 2</string>
-  <string name="place_a_call3">Poskytovateľ 3</string>
-  <string name="count_down">Sekundy: </string>
-  <string name="call_number">Komu: </string>
-  <string name="cancel_call">Zrušiť</string>
   <string name="set_subscription_error_atleast_one">Vyberte aspoň jedného poskytovateľa</string>
   <string name="set_uicc_subscription_progress">Nastavenie poskytovateľa\u2026</string>
   <string name="set_sub_success">Poskytovateľ bol úspešne nastavený</string>

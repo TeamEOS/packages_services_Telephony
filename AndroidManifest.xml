@@ -221,7 +221,9 @@
 
         <activity android:name="MSimDialerActivity"
                 android:permission="android.permission.CALL_PRIVILEGED"
-                android:configChanges="orientation|keyboardHidden">
+                android:theme="@*android:style/Theme.Holo.Dialog.Alert"
+                android:configChanges="orientation|keyboardHidden"
+                android:excludeFromRecents="true">
         </activity>
 
         <activity android:name="OutgoingCallBroadcaster"
@@ -601,7 +603,7 @@
 
         <!-- Broadcast receiver to set default handlers for various actions
              depending if MSim is available -->
-        <receiver android:name="MSimActivityDisabler" android:exported="false">
+        <receiver android:name="MSimActivityStateUpdater" android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
@@ -742,15 +744,6 @@
             android:label="@string/set_subscription"
             android:theme="@android:style/Theme.Holo.Dialog"
             android:configChanges="orientation|keyboardHidden">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-
-        <activity
-            android:name="ManagedRoaming"
-            android:configChanges="orientation|keyboardHidden"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>

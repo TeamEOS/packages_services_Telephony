@@ -15,7 +15,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="label_nsdp">شبكة SIM الفرعية فتح قفل PIN</string>
   <string name="label_cdp">SIM الشركات فتح قفل PIN</string>
   <string name="label_spdp">SIM مزود الخدمة فتح  PIN</string>
@@ -94,14 +94,11 @@
   <string name="fdn_service_unavailable">لا تتوفر خدمة FDN.</string>
   <string name="exportContacts">تصدير جهات الاتصال إلى بطاقة SIM\u2026</string>
   <string name="onscreenSwitchText">تبديل الاشتراك</string>
-  <string name="xdivert_title">X-Divert</string>
   <string name="xdivert_summary">إعدادات CFNRc</string>
   <string name="phone_numbers">أدخل أرقام الهاتف</string>
   <string name="sub1LineNumber">رقم Sub1:</string>
   <string name="sub2LineNumber">رقم  2Sub:</string>
   <string name="proceed">متابعة</string>
-  <string name="xdivert_button">X-Divert</string>
-  <string name="xdivert_setting">X-Divert</string>
   <string name="sum_xdivert_enabled">تمكين X-Divert</string>
   <string name="sum_xdivert_disabled">تعطيل X-Divert</string>
   <string name="xdivert_not_supported">X-Divert غير معتمد في CDMA</string>
@@ -112,13 +109,6 @@
   <string name="xdivert_active">مفعل</string>
   <string name="xdivert_not_active">غير مفعل</string>
   <string name="xdivert_imsi_not_read">SIM التهيئة في التقدم. الرجاء المحاولة مرة أخرى لاحقاً.</string>
-  <string name="managed_roaming_title">تمكن خدمة التجوال</string>
-  <string name="managed_roaming_title_sub1">تمكن خدمة التجوال (1 فرعي)</string>
-  <string name="managed_roaming_title_sub2">تمكن خدمة التجوال (2 فرعي)</string>
-  <string name="managed_roaming_title_sub3">تمكن خدمة التجوال (3 فرعي)</string>
-  <string name="managed_roaming_dialog_content">شبكة الاتصال مع خدمة محدودة وجدت. هل تريد بدء بحث شبكة؟</string>
-  <string name="managed_roaming_dialog_ok_button">نعم</string>
-  <string name="managed_roaming_dialog_cancel_button">لا</string>
   <string name="no_volte">غير قادر على إجراء مكالمات IMS</string>
   <string name="no_vt_allowed">لإجراء مكالمة فيديو، إيقاف تشغيل وضع TTY</string>
   <string name="ims_edit_title">تفاصيل حساب IMS</string>
@@ -155,15 +145,6 @@
   <string name="exportAllcontatsNoContacts">لا جهات اتصال التي وجدت للتصدير إلى بطاقة SIM</string>
   <string name="cursorError">بيانات المؤشر غير صالح</string>
   <string name="set_subscription">حدد الاشتراك</string>
-  <string name="card_01">بطاقة 1/SUB 1</string>
-  <string name="card_02">بطاقة 2/SUB 2</string>
-  <string name="card_03">بطاقة 3/SUB 3</string>
-  <string name="place_a_call1">اشتراك 1</string>
-  <string name="place_a_call2">اشتراك 2</string>
-  <string name="place_a_call3">اشتراك 3</string>
-  <string name="count_down">ثانية: </string>
-  <string name="call_number">إلى: </string>
-  <string name="cancel_call">إلغاء</string>
   <string name="set_subscription_error_atleast_one">حدد اشتراك واحد على الأقل</string>
   <string name="set_uicc_subscription_progress">إعداد الإشتراك\u2026</string>
   <string name="set_sub_success">تم الاشتراك بنجاح</string>

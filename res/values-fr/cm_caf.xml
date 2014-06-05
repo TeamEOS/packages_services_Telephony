@@ -15,7 +15,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="label_nsdp">Déloquer le code PIN de la SIM de sous-réseau</string>
   <string name="label_cdp">Débloquer le code PIN de la carte SIM d\'entreprise</string>
   <string name="label_spdp">Débloquer le code PIN de la carte SIM du prestataire de services</string>
@@ -38,8 +38,8 @@
   <string name="requesting_rc_unlock">Requête de déverrouillage du RUIM d\'entreprise\u2026</string>
   <string name="requesting_ruim_unlock">Requête de déverrouillage RUIM\u2026</string>
   <string name="requesting_puk_unlock">Requête de déverrouillage PUK\u2026</string>
-  <string name="nw_subset_unlock_failed">La demande de déverrouillage de la SIM de sous-réseau a échoué.</string>
-  <string name="sp_unlock_failed">La demande de déverrouillage du prestataire de services de la SIM a échoué.</string>
+  <string name="nw_subset_unlock_failed">La demande de déverrouillage de la carte SIM de sous-réseau a échoué.</string>
+  <string name="sp_unlock_failed">La demande de déverrouillage du prestataire de services de la carte SIM a échoué.</string>
   <string name="corporate_unlock_failed">La demande de déverrouillage de la carte SIM d\'entreprise a échoué.</string>
   <string name="sim_unlock_failed">La demande de déverrouillage de la carte SIM a échoué.</string>
   <string name="rnw1_unlock_failed">Requête de déverrouillage du réseau 1 RUIM échouée.</string>
@@ -93,17 +93,14 @@
   <string name="fdn_service_unavailable">Le service FDN n\'est pas disponible.</string>
   <string name="exportContacts">Exporter les contacts vers la carte SIM\u2026</string>
   <string name="onscreenSwitchText">Changer d\'abonnement</string>
-  <string name="xdivert_title">X-Divert</string>
   <string name="xdivert_summary">Paramètres CFNRc</string>
   <string name="phone_numbers">Entrez les numéros de téléphone</string>
   <string name="sub1LineNumber">Nombre Sub 1 :</string>
   <string name="sub2LineNumber">Nombre Sub 2 :</string>
   <string name="proceed">Continuer</string>
-  <string name="xdivert_button">X-Divert</string>
-  <string name="xdivert_setting">X-Divert</string>
   <string name="sum_xdivert_enabled">X-Divert activé</string>
   <string name="sum_xdivert_disabled">X-Divert désactivé</string>
-  <string name="xdivert_not_supported">X-Divert non pris en charge par le CDMA</string>
+  <string name="xdivert_not_supported">X-Divert non pris en charge avec CDMA</string>
   <string name="xdivert_enternumber_error">Entrez le numéro de téléphone pour les deux abonnements</string>
   <string name="xdivert_partial_set">X-Divert a été définie que pour le premier abonnement</string>
   <string name="xdivert_sub_absent">Les deux abonnements doivent être activées avec le processus X-Divert</string>
@@ -111,13 +108,6 @@
   <string name="xdivert_active">Actif</string>
   <string name="xdivert_not_active">Inactif</string>
   <string name="xdivert_imsi_not_read">Initialisation de la carte SIM en cours. Veuillez réessayer ultérieurement.</string>
-  <string name="managed_roaming_title">Gestion de l\'itinérance</string>
-  <string name="managed_roaming_title_sub1">Gestion de l\'itinérance (SUB 1)</string>
-  <string name="managed_roaming_title_sub2">Gestion de l\'itinérance (SUB 2)</string>
-  <string name="managed_roaming_title_sub3">Gestion de l\'itinérance (SUB 3)</string>
-  <string name="managed_roaming_dialog_content">Réseau avec un service limité trouvé. Vous voulez lancer une recherche de réseau ?</string>
-  <string name="managed_roaming_dialog_ok_button">Oui</string>
-  <string name="managed_roaming_dialog_cancel_button">Non</string>
   <string name="no_volte">Impossible d\'effectuer des appels IMS</string>
   <string name="no_vt_allowed">Pour effectuer un appel vidéo, désactivez le mode TTY</string>
   <string name="ims_edit_title">Détails du compte IMS</string>
@@ -154,15 +144,6 @@
   <string name="exportAllcontatsNoContacts">Aucun contact à exporter sur la carte SIM n\'a été trouvé</string>
   <string name="cursorError">Données de curseur non valide</string>
   <string name="set_subscription">Sélectionner l\'abonnement</string>
-  <string name="card_01">Carte 1 / SUB 1</string>
-  <string name="card_02">Carte 2 / SUB 2</string>
-  <string name="card_03">Carte 3 / SUB 3</string>
-  <string name="place_a_call1">Abonnement 1</string>
-  <string name="place_a_call2">Abonnement 2</string>
-  <string name="place_a_call3">Abonnement 3</string>
-  <string name="count_down">Secondes : </string>
-  <string name="call_number">À : </string>
-  <string name="cancel_call">Annuler</string>
   <string name="set_subscription_error_atleast_one">Sélectionnez au moins un abonnement</string>
   <string name="set_uicc_subscription_progress">Paramètre d\'abonnement\u2026</string>
   <string name="set_sub_success">L\'abonnement a été créé avec succès</string>
@@ -178,7 +159,7 @@
   <string name="set_sub_deactivate_failed">La désactivation a échoué</string>
   <string name="set_sub_activate_not_supported">Activation non prise en charge</string>
   <string name="set_sub_deactivate_not_supported">Désactivation non prise en charge</string>
-  <string name="set_sub_no_change">Aucun changement dans abonnement</string>
+  <string name="set_sub_no_change">Aucun changement dans l\'abonnement</string>
   <string name="new_cards_available">Nouvelle carte disponible. Veuillez configurer vos abonnements.</string>
   <string name="config_sub_title">Configurer l\'abonnement</string>
   <string name="deact_all_sub_not_supported">La désactivation de tous les abonnements n\'est pas prise en charge.</string>

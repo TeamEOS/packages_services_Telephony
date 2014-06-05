@@ -15,7 +15,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="label_nsdp">PIN para desbloquear subconjunto de rede SIM</string>
   <string name="label_cdp">Pin para desbloquear o SIM corporativo</string>
   <string name="label_spdp">PIN para desbloquear provedor de serviço SIM</string>
@@ -38,17 +38,17 @@
   <string name="requesting_rc_unlock">Solicitando desbloqueio do RUIM corporativo\u2026</string>
   <string name="requesting_ruim_unlock">Solicitando desbloqueio do RUIM\u2026</string>
   <string name="requesting_puk_unlock">Solicitando desbloqueio do PUK\u2026</string>
-  <string name="nw_subset_unlock_failed">Sem sucesso na solicitação de desbloqueio do subconjunto de rede SIM.</string>
-  <string name="sp_unlock_failed">Sem sucesso na solicitação de desbloqueio do provedor de serviço SIM.</string>
-  <string name="corporate_unlock_failed">Sem sucesso na solicitação de desbloqueio do SIM corporativo.</string>
+  <string name="nw_subset_unlock_failed">Solicitação mal sucedida de desbloqueio do subconjunto de rede SIM.</string>
+  <string name="sp_unlock_failed">Solicitação mal sucedida de desbloqueio do provedor de serviço SIM.</string>
+  <string name="corporate_unlock_failed">Solicitação mal sucedida de desbloqueio do SIM corporativo.</string>
   <string name="sim_unlock_failed">Sem sucesso na solicitação de desbloqueio do SIM.</string>
-  <string name="rnw1_unlock_failed">Sem sucesso na solicitação de desbloqueio da rede RUIM 1.</string>
-  <string name="rnw2_unlock_failed">Sem sucesso na solicitação de desbloqueio da rede RUIM 2.</string>
-  <string name="rhrpd_unlock_failed">Sem sucesso na solicitação de desbloqueio do RUIM HRPD.</string>
-  <string name="rsp_unlock_failed">Sem sucesso na solicitação de desbloqueio do provedor de serviço RUIM.</string>
-  <string name="rc_unlock_failed">Sem sucesso na solicitação de desbloqueio do RUIM corporativo.</string>
-  <string name="ruim_unlock_failed">Sem sucesso na solicitação de desbloqueio do RUIM.</string>
-  <string name="puk_unlock_failed">Sem sucesso na solicitação de desbloqueio do PUK.</string>
+  <string name="rnw1_unlock_failed">Solicitação mal sucedida de desbloqueio da rede RUIM 1.</string>
+  <string name="rnw2_unlock_failed">Solicitação mal sucedida de desbloqueio da rede RUIM 2.</string>
+  <string name="rhrpd_unlock_failed">Solicitação mal sucedida de desbloqueio do RUIM HRPD.</string>
+  <string name="rsp_unlock_failed">Solicitação mal sucedida de desbloqueio do provedor de serviço RUIM.</string>
+  <string name="rc_unlock_failed">Solicitação mal sucedida de desbloqueio do RUIM corporativo.</string>
+  <string name="ruim_unlock_failed">Solicitação mal sucedida de desbloqueio do RUIM.</string>
+  <string name="puk_unlock_failed">Solicitação mal sucedida de desbloqueio do PUK.</string>
   <string name="nw_subset_unlock_success">Sucesso na solicitação de desbloqueio do subconjunto de rede SIM.</string>
   <string name="sp_unlock_success">Sucesso no desbloqueio do provedor de serviço SIM.</string>
   <string name="corporate_unlock_success">Sucesso no desbloqueio do SIM corporativo.</string>
@@ -93,14 +93,11 @@
   <string name="fdn_service_unavailable">Serviço FDN não está disponível.</string>
   <string name="exportContacts">Exportação de contatos para o cartão SIM\u2026</string>
   <string name="onscreenSwitchText">Trocar assinatura</string>
-  <string name="xdivert_title">X-Divert</string>
   <string name="xdivert_summary">Configurações CFNRc</string>
   <string name="phone_numbers">Inserir os números de telefone</string>
   <string name="sub1LineNumber">Número Ass 1:</string>
   <string name="sub2LineNumber">Número Ass 2:</string>
   <string name="proceed">Continuar</string>
-  <string name="xdivert_button">X-Divert</string>
-  <string name="xdivert_setting">X-Divert</string>
   <string name="sum_xdivert_enabled">X-Divert ativado</string>
   <string name="sum_xdivert_disabled">X-Divert desativado</string>
   <string name="xdivert_not_supported">X-Divert não é suportado por CDMA</string>
@@ -111,13 +108,6 @@
   <string name="xdivert_active">Ativo</string>
   <string name="xdivert_not_active">Inativo</string>
   <string name="xdivert_imsi_not_read">Inicialização de SIM em andamento. Por favor, tente novamente mais tarde.</string>
-  <string name="managed_roaming_title">Roaming gerenciado</string>
-  <string name="managed_roaming_title_sub1">Roaming gerenciado (ASS 1)</string>
-  <string name="managed_roaming_title_sub2">Roaming gerenciado (ASS 2)</string>
-  <string name="managed_roaming_title_sub3">Roaming gerenciado (ASS 3)</string>
-  <string name="managed_roaming_dialog_content">Rede com serviço limitado encontrada. Você quer iniciar uma busca de rede?</string>
-  <string name="managed_roaming_dialog_ok_button">Sim</string>
-  <string name="managed_roaming_dialog_cancel_button">Não</string>
   <string name="no_volte">Não é possível fazer chamadas IMS</string>
   <string name="no_vt_allowed">Para realizar uma chamada de vídeo, desative o modo TTY</string>
   <string name="ims_edit_title">Detalhes da conta IMS</string>
@@ -154,15 +144,6 @@
   <string name="exportAllcontatsNoContacts">Nenhum contato encontrado para exportar para o SIM</string>
   <string name="cursorError">Dados inválidos do cursor</string>
   <string name="set_subscription">Selecionar assinatura</string>
-  <string name="card_01">Cartão 1 / ASS 1</string>
-  <string name="card_02">Cartão 2 / ASS 2</string>
-  <string name="card_03">Cartão 3 / ASS 3</string>
-  <string name="place_a_call1">Assinatura 1</string>
-  <string name="place_a_call2">Assinatura 2</string>
-  <string name="place_a_call3">Assinatura 3</string>
-  <string name="count_down">Segundos: </string>
-  <string name="call_number">Para: </string>
-  <string name="cancel_call">Cancelar</string>
   <string name="set_subscription_error_atleast_one">Selecione pelo menos uma assinatura</string>
   <string name="set_uicc_subscription_progress">Configurando assinatura\u2026</string>
   <string name="set_sub_success">Assinatura foi definida com sucesso</string>
