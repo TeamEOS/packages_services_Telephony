@@ -29,6 +29,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
@@ -430,6 +431,20 @@ public class PhoneUtils {
             }
         }
         return answered;
+    }
+
+    public static void deflectCall(Connection conn, String number) {
+        Log.d(LOG_TAG, "deflectCall");
+        final Phone phone = conn.getCall().getPhone();
+        Message msg = null; // palceholder to respond back to UI
+        if (phone != null && phone.getPhoneType() == PhoneConstants.PHONE_TYPE_IMS) {
+            try {
+                int index = conn.getIndex();
+                phone.deflectCall(index, number, msg);
+            } catch (CallStateException e) {
+                Log.e(LOG_TAG, "Exception in deflectCall" + e);
+            }
+        }
     }
 
     public static void modifyCallInitiate(Connection conn, int newCallType, String[] newExtras) {
@@ -3605,5 +3620,17 @@ public class PhoneUtils {
         }
         if (DBG) log("isImsVtCallNotAllowed: " + isNotAllowed);
         return isNotAllowed;
+    }
+
+    public static boolean isPackageInstalled(Context context, String pkg) {
+        if (pkg == null) {
+            return false;
+        }
+        try {
+            PackageInfo pi = context.getPackageManager().getPackageInfo(pkg, 0);
+            return pi.applicationInfo.enabled;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
     }
 }
