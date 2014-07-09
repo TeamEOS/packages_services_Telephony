@@ -255,6 +255,11 @@ public class MSimCallNotifier extends CallNotifier {
             return;
         }
 
+        // Check if phone number is blacklisted
+        if (isConnectionBlacklisted(c)) {
+            return;
+        }
+
         // Stop any signalInfo tone being played on receiving a Call
         stopSignalInfoTone();
 
