@@ -72,7 +72,7 @@
   <string name="enable_forward_lookup_title">正向查询</string>
   <string name="enable_forward_lookup_summary">在拨号器搜索时显示附近地点</string>
   <string name="enable_people_lookup_title">人名查询</string>
-  <string name="enable_people_lookup_summary">在拨号器搜索人名时显示在线搜索结果</string>
+  <string name="enable_people_lookup_summary">在拨号器中搜索时，即时显示搜索联系人结果</string>
   <string name="enable_reverse_lookup_title">反向查询</string>
   <string name="enable_reverse_lookup_summary">为未知来电号码查询人名或地点信息</string>
   <string name="choose_lookup_providers">选择查询提供商</string>
@@ -83,4 +83,10 @@
   <string name="msim_call_selector_title">拨打 <xliff:g id="number">%s</xliff:g> 通过</string>
   <string name="msim_call_selector_item">SIM<xliff:g id="index">%1$d</xliff:g>: <xliff:g id="operator">%2$s</xliff:g></string>
   <string name="cyngn_reverse_lookup_provider_name">Cyngn 中国 (CN)</string>
+  <string name="preference_category_t9_dialpad_search">拨号盘 T9 搜索</string>
+  <string name="t9_search_input_locale">T9 搜索输入</string>
+  <string name="t9_search_input_locale_default">默认</string>
+  <string name="incoming_call_style_title">来电屏幕样式</string>
+  <string name="incoming_call_style_classic">经典</string>
+  <string name="incoming_call_style_fullscreen_photo">全屏来电者照片</string>
 </resources>

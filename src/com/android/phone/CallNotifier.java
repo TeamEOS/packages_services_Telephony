@@ -1053,9 +1053,8 @@ public class CallNotifier extends Handler
             return;
         }
 
-        boolean disconnectedDueToBlacklist = false;
+        boolean disconnectedDueToBlacklist = isDisconnectedDueToBlacklist(c);
         if (c != null) {
-            disconnectedDueToBlacklist = BLACKLIST.equals(c.getUserData());
             boolean vibHangup = PhoneUtils.PhoneSettings.vibHangup(mApplication);
             if (!disconnectedDueToBlacklist && vibHangup && c.getDurationMillis() > 0) {
                 vibrate(50, 100, 50);
@@ -2159,5 +2158,12 @@ public class CallNotifier extends Handler
 
     private void log(String msg) {
         Log.d(LOG_TAG, msg);
+    }
+
+    protected boolean isDisconnectedDueToBlacklist(Connection c) {
+        if (c == null) {
+            return false;
+        }
+        return BLACKLIST.equals(c.getUserData());
     }
 }
