@@ -40,12 +40,14 @@ import com.android.internal.telephony.util.BlacklistUtils;
 import com.android.phone.CallFeaturesSetting;
 
 import android.app.ActivityManagerNative;
+import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothHeadset;
 import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.database.Cursor;
 import android.media.AudioManager;
+import android.media.RingtoneManager;
 import android.media.ToneGenerator;
 import android.net.Uri;
 import android.os.AsyncResult;
@@ -414,6 +416,8 @@ public class CallNotifier extends Handler
         Call ringing = c.getCall();
         Phone phone = ringing.getPhone();
 
+        hideUssdResponseDialog();
+
         // Check for a few cases where we totally ignore incoming calls.
         if (ignoreAllIncomingCalls(phone)) {
             // Immediately reject the call, without even indicating to the user
@@ -570,6 +574,19 @@ public class CallNotifier extends Handler
         return false;
     }
 
+    protected void hideUssdResponseDialog() {
+        Dialog ussdRespDialog = mApplication.getUSSDResponseDialog();
+
+        // If a new ringing connection comes, and ussd dialog is showing,
+        // need to hide the ussd dialog.
+        if (mCM.getState() == PhoneConstants.State.RINGING) {
+            if ((ussdRespDialog != null) && ussdRespDialog.isShowing()) {
+                if (VDBG) log("hide ussd dialog...");
+                ussdRespDialog.hide();
+            }
+        }
+    }
+
     /**
      * Determines whether or not we're allowed to present incoming calls to the
      * user, based on the capabilities and/or current state of the device.
@@ -661,8 +678,16 @@ public class CallNotifier extends Handler
             }
         }
         if (shouldStartQuery) {
+            int subscription = 0;
+            if (c != null && c.getCall() != null) {
+               Phone phone = c.getCall().getPhone();
+               subscription = phone.getSubscription();
+            }
+
             // Reset the ringtone to the default first.
-            mRinger.setCustomRingtoneUri(Settings.System.DEFAULT_RINGTONE_URI);
+            mRinger.setCustomRingtoneUri(subscription == 0 ?
+                                        Settings.System.DEFAULT_RINGTONE_URI
+                                        : Settings.System.DEFAULT_RINGTONE_URI_2);
 
             // query the callerinfo to try to get the ringer.
             PhoneUtils.CallerInfoToken cit = PhoneUtils.startGetCallerInfo(
@@ -796,6 +821,13 @@ public class CallNotifier extends Handler
      */
     protected void onPhoneStateChanged(AsyncResult r) {
         PhoneConstants.State state = mCM.getState();
+
+        if(PhoneGlobals.getInstance().isCsvtActive() &&
+            state == PhoneConstants.State.OFFHOOK ) {
+            log("onPhoneStateChanged: CSVT is active");
+            return;
+        }
+
         if (VDBG) log("onPhoneStateChanged: state = " + state);
 
         // Turn status bar notifications on or off depending upon the state
@@ -966,7 +998,8 @@ public class CallNotifier extends Handler
                 // send directly to voicemail.
                 if (ci.shouldSendToVoicemail) {
                     if (DBG) log("send to voicemail flag detected. hanging up.");
-                    final Call ringingCall = mCM.getFirstActiveRingingCall();
+                    final Call ringingCall = mCM.getFirstActiveRingingCall(
+                            c.getCall().getPhone().getSubscription());
                     if (ringingCall != null && ringingCall.getLatestConnection() == c) {
                         PhoneUtils.hangupRingingCall(ringingCall);
                         return;
@@ -1011,8 +1044,10 @@ public class CallNotifier extends Handler
             if (entry != null) {
                 if (entry.sendToVoicemail) {
                     log("send to voicemail flag detected (in fallback cache). hanging up.");
-                    if (mCM.getFirstActiveRingingCall().getLatestConnection() == c) {
-                        PhoneUtils.hangupRingingCall(mCM.getFirstActiveRingingCall());
+                    final Call ringingCall = mCM.getFirstActiveRingingCall(
+                            c.getCall().getPhone().getSubscription());
+                    if (ringingCall.getLatestConnection() == c) {
+                        PhoneUtils.hangupRingingCall(ringingCall);
                         return;
                     }
                 }
@@ -1036,6 +1071,8 @@ public class CallNotifier extends Handler
 
     protected void onDisconnect(AsyncResult r) {
         if (VDBG) log("onDisconnect()...  CallManager state: " + mCM.getState());
+
+        showUssdResponseDialog();
 
         mVoicePrivacyState = false;
         Connection c = (Connection) r.result;
@@ -1295,6 +1332,18 @@ public class CallNotifier extends Handler
             0, v1, p1, v2
         };
         mVibrator.vibrate(pattern, -1);
+    }
+
+    protected void showUssdResponseDialog() {
+        Dialog ussdRespDialog = mApplication.getUSSDResponseDialog();
+        // If the connection disconnect, and ussd dialog is not null,
+        // need to show the ussd dialog.
+        if (mCM.getState() == PhoneConstants.State.IDLE) {
+            if (ussdRespDialog != null) {
+                if (VDBG) log("show ussd dialog...");
+                ussdRespDialog.show();
+            }
+        }
     }
 
     /**
@@ -2154,6 +2203,12 @@ public class CallNotifier extends Handler
         } else {
             Log.e(LOG_TAG, "Error EVENT_MODIFY_CALL AsyncResult ar= " + r);
         }
+    }
+
+    void onCdmaCallWaitingAnswered() {
+        // Remove Call waiting timers
+        removeMessages(CALLWAITING_CALLERINFO_DISPLAY_DONE);
+        removeMessages(CALLWAITING_ADDCALL_DISABLE_TIMEOUT);
     }
 
     private void log(String msg) {
